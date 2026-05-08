@@ -75,8 +75,8 @@ export default function Home() {
           </div>
         </section>
 
-        <div className="flex justify-center lg:col-span-2">
-          <div className="inline-flex items-center gap-3 rounded-full border border-[#450041]/18 bg-[#FFFFFF] px-4 py-2 shadow-[0_12px_38px_rgba(69,0,65,0.10)]">
+        <div className="flex flex-wrap justify-center gap-3 lg:col-span-2">
+          <div className="inline-flex min-h-14 items-center gap-3 rounded-full border border-[#450041]/18 bg-[#FFFFFF] px-5 py-2 shadow-[0_12px_38px_rgba(69,0,65,0.10)]">
             <p className="text-xs font-black uppercase tracking-[0.16em] text-[#450041]/65">
               Built for Dev3pack
             </p>
@@ -88,6 +88,17 @@ export default function Home() {
               src="/dev3pack-logo.png"
               width={120}
             />
+          </div>
+          <div className="inline-flex min-h-14 items-center gap-3 rounded-full border border-[#450041]/18 bg-[#FFFFFF] px-5 py-2 shadow-[0_12px_38px_rgba(69,0,65,0.10)]">
+            <p className="text-xs font-black uppercase tracking-[0.16em] text-[#450041]/65">
+              Deployed on Devnet
+            </p>
+            <span
+              aria-hidden="true"
+              className="grid h-10 w-10 place-items-center rounded-full bg-[#00B65C]/12 text-[10px] font-black uppercase tracking-[0.08em] text-[#00B65C] ring-1 ring-[#00B65C]/25"
+            >
+              Dev
+            </span>
           </div>
         </div>
       </section>
