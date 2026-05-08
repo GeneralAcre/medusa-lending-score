@@ -29,9 +29,9 @@ const tools = [
     href: "/badge",
   },
   {
-    title: "Improvement Roadmap",
-    copy: "Track personalized actions like staking, repayment, governance, and liquidity health.",
-    href: "/roadmap",
+    title: "Score Simulator",
+    copy: "Preview how staking, repayment, longer holding, and stronger liquidity could move the score.",
+    href: "/calculator",
   },
 ];
 
