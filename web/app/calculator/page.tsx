@@ -8,7 +8,7 @@ export default function CalculatorPage() {
       <section className="mx-auto max-w-7xl px-5 py-10 sm:px-6 lg:px-8">
         <div className="mb-8 max-w-3xl">
           <p className="text-sm font-black uppercase tracking-[0.18em] text-[#00B65C]">
-            Score Calculator
+            Score
           </p>
           <h1 className="mt-3 text-3xl font-black sm:text-5xl">
             Score Simulator and DeFi Rate Calculator

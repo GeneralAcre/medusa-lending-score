@@ -197,7 +197,7 @@ export function CreditConsole({ compact = false }: { compact?: boolean }) {
         {!compact ? (
           <div className="mb-6 flex flex-wrap items-center justify-between gap-3 pt-6">
             <div>
-              <h1 className="text-2xl font-black sm:text-3xl">Dashboard</h1>
+              <h1 className="text-2xl font-black sm:text-3xl">Calculator</h1>
               <p className="mt-1 text-sm text-[#450041]/65">
                 Search an address or connect a wallet to view credit scoring.
               </p>

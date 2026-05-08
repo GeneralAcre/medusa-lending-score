@@ -6,10 +6,10 @@ import { useState } from "react";
 
 const navItems = [
   { label: "Home", href: "/" },
-  { label: "Dashboard", href: "/dashboard" },
+  { label: "Calculator", href: "/dashboard" },
   { label: "Leaderboard", href: "/leaderboard" },
   { label: "Badge", href: "/badge" },
-  { label: "Score Calculator", href: "/calculator" },
+  { label: "Score", href: "/calculator" },
 ];
 
 export function SiteHeader() {
