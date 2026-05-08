@@ -19,16 +19,19 @@ const steps = [
 
 const tools = [
   {
-    title: "Wallet Lookup",
-    copy: "Paste any Solana address to view a public credit summary and shareable score context.",
+    title: "Leaderboard",
+    copy: "Browse public top-scoring wallets with anonymous defaults and opt-in display names.",
+    href: "/leaderboard",
   },
   {
-    title: "Score Simulator",
-    copy: "Preview how staking, repayment, longer holding, and stronger liquidity could move the score.",
+    title: "Score Badge",
+    copy: "Preview a non-transferable devnet credential for score-gated protocol access.",
+    href: "/badge",
   },
   {
-    title: "DeFi Rate Calculator",
-    copy: "Compare score-tier APR differences across configured lending partners before taking action.",
+    title: "Improvement Roadmap",
+    copy: "Track personalized actions like staking, repayment, governance, and liquidity health.",
+    href: "/roadmap",
   },
 ];
 
@@ -128,13 +131,14 @@ export default function Home() {
         </div>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {tools.map((tool) => (
-            <article
-              className="rounded-lg border border-[#450041]/18 bg-[#450041]/5 p-6"
+            <Link
+              className="rounded-lg border border-[#450041]/18 bg-[#450041]/5 p-6 transition hover:border-[#00B65C] hover:bg-[#00B65C]/5"
+              href={tool.href}
               key={tool.title}
             >
               <h3 className="text-xl font-black">{tool.title}</h3>
               <p className="mt-3 text-sm leading-6 text-[#450041]/75">{tool.copy}</p>
-            </article>
+            </Link>
           ))}
         </div>
       </section>
