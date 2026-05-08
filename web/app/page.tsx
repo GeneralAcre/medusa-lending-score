@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { GridHoverEffect } from "@/components/GridHoverEffect";
 import { SiteHeader } from "@/components/SiteHeader";
 
 const steps = [
@@ -88,7 +89,8 @@ export default function Home() {
           </div>
         </div>
 
-        <section className="grid place-items-center overflow-hidden rounded-xl border border-[#450041]/18 bg-[#450041]/5 p-6 shadow-[0_24px_90px_rgba(69,0,65,0.12)] sm:p-8">
+        <section className="relative grid place-items-center overflow-hidden rounded-xl border border-[#450041]/18 bg-[#450041]/5 p-6 shadow-[0_24px_90px_rgba(69,0,65,0.12)] sm:p-8">
+          <GridHoverEffect />
           <div className="credit-gauge" aria-label="Animated credit score gauge">
             <div className="credit-gauge__ring" />
             <div className="credit-gauge__core">
