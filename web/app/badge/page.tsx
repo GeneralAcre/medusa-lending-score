@@ -1,11 +1,12 @@
 import Link from "next/link";
+import { BadgeMintClient } from "@/components/BadgeMintClient";
 import { SiteHeader } from "@/components/SiteHeader";
 
 const credentialFacts = [
   ["Cluster", "Solana Devnet"],
-  ["Credential type", "Soulbound score badge"],
-  ["Transferability", "Non-transferable"],
-  ["Gate checks", "Score band, model version, issuer"],
+  ["Credential type", "Score credential payload"],
+  ["Source", "Live Solana RPC score"],
+  ["Mint status", "Requires deployed program"],
 ];
 
 export default function BadgePage() {
@@ -18,11 +19,11 @@ export default function BadgePage() {
             Score Badge / Soulbound NFT
           </p>
           <h1 className="mt-3 text-3xl font-black sm:text-5xl">
-            Mint a non-transferable credit credential.
+            Generate a real devnet score credential.
           </h1>
           <p className="mt-4 text-sm leading-6 text-[#450041]/70 sm:text-base sm:leading-7">
-            Users can publish their score as a devnet credential that protocols can
-            gate-check without exposing the full wallet report.
+            This page uses the live score API. It does not fake minting: on-chain minting
+            stays disabled until a real non-transferable credential program is deployed.
           </p>
 
           <div className="mt-7 grid gap-3 sm:grid-cols-2">
@@ -50,41 +51,7 @@ export default function BadgePage() {
           </div>
         </div>
 
-        <section className="rounded-xl border border-[#450041]/18 bg-[#450041]/5 p-6 shadow-[0_24px_90px_rgba(69,0,65,0.12)]">
-          <div className="rounded-xl border border-[#450041]/18 bg-[#FFFFFF] p-6">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <p className="rounded-full border border-[#00B65C]/30 px-3 py-1 text-xs font-black uppercase tracking-[0.12em] text-[#00B65C]">
-                Devnet Ready
-              </p>
-              <p className="text-xs font-black uppercase tracking-[0.12em] text-[#450041]/45">
-                v1 credential
-              </p>
-            </div>
-            <div className="mt-10 grid place-items-center">
-              <div className="grid h-48 w-48 place-items-center rounded-full bg-[#450041] text-[#FFFFFF] shadow-[0_24px_70px_rgba(69,0,65,0.25)]">
-                <div className="text-center">
-                  <p className="text-6xl font-black leading-none">88</p>
-                  <p className="mt-2 text-sm font-black uppercase tracking-[0.18em] text-[#00B65C]">
-                    Prime
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="mt-10">
-              <h2 className="text-xl font-black">Solana Trust Score Badge</h2>
-              <p className="mt-3 text-sm leading-6 text-[#450041]/70">
-                A wallet-bound credential for reputation checks, lending allowlists,
-                fee tiers, and score-gated product access.
-              </p>
-            </div>
-            <button
-              className="mt-6 w-full rounded-md bg-[#450041] px-5 py-3 text-sm font-black text-[#FFFFFF]"
-              type="button"
-            >
-              Mint Flow Preview
-            </button>
-          </div>
-        </section>
+        <BadgeMintClient />
       </section>
     </main>
   );
