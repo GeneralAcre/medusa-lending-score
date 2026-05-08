@@ -13,11 +13,11 @@ export default function LeaderboardPage() {
               Public wallet ranking
             </p>
             <h1 className="mt-3 text-3xl font-black sm:text-5xl">
-              Rank real scored wallets.
+              Solana reputation leaderboard.
             </h1>
             <p className="mt-4 text-sm leading-6 text-[#450041]/70 sm:text-base sm:leading-7">
-              No seeded wallets. Add real devnet addresses to score them through RPC and
-              opt in to display a name.
+              Starts with curated ecosystem names for context. Add real devnet addresses
+              to score them through RPC and opt in to display a name.
             </p>
           </div>
           <Link

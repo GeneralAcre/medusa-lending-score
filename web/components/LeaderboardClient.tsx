@@ -10,9 +10,57 @@ type LeaderboardEntry = {
   band: CreditReport["band"];
   signals: string;
   updatedAt: string;
+  source: "live" | "curated";
 };
 
 const storageKey = "solana-trust-leaderboard";
+const curatedEntries: LeaderboardEntry[] = [
+  {
+    wallet: "curated-toly-sol",
+    displayName: "toly.sol",
+    score: 96,
+    band: "Prime",
+    signals: "Curated Solana ecosystem profile",
+    updatedAt: "2026-05-09T00:00:00.000Z",
+    source: "curated",
+  },
+  {
+    wallet: "curated-mert-sol",
+    displayName: "mert.sol",
+    score: 93,
+    band: "Prime",
+    signals: "Curated Solana ecosystem profile",
+    updatedAt: "2026-05-09T00:00:00.000Z",
+    source: "curated",
+  },
+  {
+    wallet: "curated-raj-sol",
+    displayName: "raj.sol",
+    score: 90,
+    band: "Prime",
+    signals: "Curated Solana ecosystem profile",
+    updatedAt: "2026-05-09T00:00:00.000Z",
+    source: "curated",
+  },
+  {
+    wallet: "curated-armani-sol",
+    displayName: "armani.sol",
+    score: 87,
+    band: "Prime",
+    signals: "Curated Solana ecosystem profile",
+    updatedAt: "2026-05-09T00:00:00.000Z",
+    source: "curated",
+  },
+  {
+    wallet: "curated-anatoly-sol",
+    displayName: "anatoly.sol",
+    score: 84,
+    band: "Prime",
+    signals: "Curated Solana ecosystem profile",
+    updatedAt: "2026-05-09T00:00:00.000Z",
+    source: "curated",
+  },
+];
 
 export function LeaderboardClient() {
   const [wallet, setWallet] = useState("");
@@ -34,7 +82,7 @@ export function LeaderboardClient() {
 
   const rankedEntries = useMemo(
     () =>
-      [...entries].sort((left, right) => {
+      [...entries, ...curatedEntries].sort((left, right) => {
         if (right.score !== left.score) return right.score - left.score;
         return right.updatedAt.localeCompare(left.updatedAt);
       }),
@@ -71,6 +119,7 @@ export function LeaderboardClient() {
         band: report.band,
         signals: `${report.metrics.sampledTransactions} txs / ${report.metrics.observedAgeDays} days / ${report.metrics.protocolInteractions} protocol touches`,
         updatedAt: new Date().toISOString(),
+        source: "live",
       };
       const nextEntries = [
         nextEntry,
@@ -149,16 +198,13 @@ export function LeaderboardClient() {
                 <p className="text-xs font-bold uppercase text-[#00B65C]">{entry.band}</p>
               </div>
               <p className="hidden text-sm text-[#450041]/55 sm:block">
-                {new Date(entry.updatedAt).toLocaleDateString()}
+                {entry.source === "live"
+                  ? new Date(entry.updatedAt).toLocaleDateString()
+                  : "Curated demo"}
               </p>
             </article>
           ))
-        ) : (
-          <div className="p-6 text-sm leading-6 text-[#450041]/70">
-            No wallets have opted in yet. Add a real devnet wallet above to create the
-            first leaderboard entry from live RPC scoring.
-          </div>
-        )}
+        ) : null}
       </section>
     </>
   );
