@@ -17,6 +17,21 @@ const steps = [
   },
 ];
 
+const tools = [
+  {
+    title: "Wallet Lookup",
+    copy: "Paste any Solana address to view a public credit summary and shareable score context.",
+  },
+  {
+    title: "Score Simulator",
+    copy: "Preview how staking, repayment, longer holding, and stronger liquidity could move the score.",
+  },
+  {
+    title: "DeFi Rate Calculator",
+    copy: "Compare score-tier APR differences across configured lending partners before taking action.",
+  },
+];
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#FFFFFF] text-[#450041]">
@@ -92,6 +107,31 @@ export default function Home() {
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-14 sm:px-6 lg:px-8">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="text-sm font-black uppercase tracking-[0.2em] text-[#00B65C]">
+              Dashboard tools
+            </p>
+            <h2 className="mt-3 text-3xl font-black">Lookup, simulate, compare.</h2>
+          </div>
+          <Link className="text-sm font-black text-[#00B65C]" href="/calculator">
+            Open calculator
+          </Link>
+        </div>
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          {tools.map((tool) => (
+            <article
+              className="rounded-lg border border-[#450041]/18 bg-[#450041]/5 p-6"
+              key={tool.title}
+            >
+              <h3 className="text-xl font-black">{tool.title}</h3>
+              <p className="mt-3 text-sm leading-6 text-[#450041]/75">{tool.copy}</p>
+            </article>
+          ))}
         </div>
       </section>
 

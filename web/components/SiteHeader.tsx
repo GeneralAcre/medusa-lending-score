@@ -7,6 +7,7 @@ import { useState } from "react";
 const navItems = [
   { label: "Home", href: "/" },
   { label: "Dashboard", href: "/dashboard" },
+  { label: "Score Calculator", href: "/calculator" },
 ];
 
 export function SiteHeader() {

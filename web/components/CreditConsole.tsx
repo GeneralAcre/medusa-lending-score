@@ -223,6 +223,18 @@ export function CreditConsole({ compact = false }: { compact?: boolean }) {
           </div>
         ) : null}
 
+        {!compact ? (
+          <section className="mb-6 rounded-xl border border-[#450041]/18 bg-[#450041]/5 p-5">
+            <p className="text-sm font-black uppercase tracking-[0.16em] text-[#00B65C]">
+              Wallet Lookup
+            </p>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-[#450041]/70">
+              Paste any Solana address to view its public credit summary from RPC data.
+              This is the organic lookup flow users can share before connecting a wallet.
+            </p>
+          </section>
+        ) : null}
+
         <div className="mb-6 grid gap-3 lg:grid-cols-[180px_minmax(0,1fr)_220px]">
           <select
             className="min-h-14 rounded-lg border border-[#450041]/20 bg-[#FFFFFF] px-3 text-sm text-[#450041] outline-none"
