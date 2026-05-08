@@ -1,5 +1,16 @@
 {
-  "framework": "nextjs",
+  "version": 2,
   "installCommand": "npm install",
-  "buildCommand": "npm run build"
+  "builds": [
+    {
+      "src": "web/package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "web/$1"
+    }
+  ]
 }
