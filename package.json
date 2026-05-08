@@ -1,10 +1,15 @@
 {
   "license": "ISC",
+  "packageManager": "npm@11.6.2",
+  "private": true,
+  "workspaces": [
+    "web"
+  ],
   "scripts": {
-    "dev": "npm --prefix web run dev",
-    "build": "npm --prefix web run build",
-    "start": "npm --prefix web run start",
-    "web:lint": "npm --prefix web run lint",
+    "dev": "npm --workspace web run dev",
+    "build": "npm --workspace web run build",
+    "start": "npm --workspace web run start",
+    "web:lint": "npm --workspace web run lint",
     "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w",
     "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check"
   },
