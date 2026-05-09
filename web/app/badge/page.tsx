@@ -50,7 +50,7 @@ export default function BadgePage() {
             Wallet profile, points, and badge level.
           </h1>
           <p className="mt-4 max-w-3xl text-sm leading-6 text-[#450041]/70 sm:text-base sm:leading-7">
-            Paste a wallet address to see the current Solana Trust points, the Medusa badge
+            Paste a wallet address to see the current Medusa points, the Medusa badge
             earned by that score, and how close the wallet is to the next level.
           </p>
 

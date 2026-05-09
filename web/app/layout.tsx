@@ -4,7 +4,7 @@ import "@solana/wallet-adapter-react-ui/styles.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Solana Trust",
+  title: "Medusa",
   description: "Decentralized credit scoring for Solana wallets.",
 };
 

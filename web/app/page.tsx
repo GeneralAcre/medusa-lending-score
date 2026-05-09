@@ -52,7 +52,7 @@ export default function Home() {
             Simple credit scoring for on-chain borrowers.
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-7 text-[#450041]/75 sm:text-lg sm:leading-8">
-            Solana Trust turns wallet behavior into a readable borrower profile.
+            Medusa turns wallet behavior into a readable borrower profile.
             Use the profile page to search an address, review its points, and see the badge it earns.
           </p>
           <div className="mt-7 flex flex-wrap gap-3 sm:gap-4">
@@ -70,7 +70,12 @@ export default function Home() {
             </a>
           </div>
           <div className="mt-12 flex flex-wrap gap-3">
-            <div className="inline-flex min-h-14 items-center gap-3 rounded-full border border-[#450041]/18 bg-[#FFFFFF] px-5 py-2 shadow-[0_12px_38px_rgba(69,0,65,0.10)]">
+            <a
+              className="inline-flex min-h-14 items-center gap-3 rounded-full border border-[#450041]/18 bg-[#FFFFFF] px-5 py-2 shadow-[0_12px_38px_rgba(69,0,65,0.10)] transition hover:border-[#00B65C] hover:text-[#00B65C]"
+              href="https://dev3pack.xyz/"
+              rel="noreferrer"
+              target="_blank"
+            >
               <p className="text-xs font-black uppercase tracking-[0.16em] text-[#450041]/65">
                 Built for Dev3pack
               </p>
@@ -82,7 +87,7 @@ export default function Home() {
                 src="/dev3pack-logo.png"
                 width={120}
               />
-            </div>
+            </a>
             <a
               className="inline-flex min-h-14 items-center rounded-full border border-[#450041]/18 bg-[#FFFFFF] px-5 py-2 shadow-[0_12px_38px_rgba(69,0,65,0.10)] transition hover:border-[#00B65C] hover:text-[#00B65C]"
               href={`https://explorer.solana.com/address/${devnetProgramId}?cluster=devnet`}
@@ -153,7 +158,7 @@ export default function Home() {
       </section>
 
       <footer className="px-6 py-8 text-center text-sm text-[#450041]/55">
-        Solana Trust v1. Wallet scoring dashboard for DeFi credit checks.
+        Medusa v1. Wallet scoring dashboard for DeFi credit checks.
       </footer>
     </main>
   );

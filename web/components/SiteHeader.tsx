@@ -22,7 +22,7 @@ export function SiteHeader() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-6 sm:px-6 lg:px-8">
         <Link className="flex items-center" href="/" onClick={() => setIsOpen(false)}>
           <Image
-            alt="Solana Trust Medusa logo"
+            alt="Medusa logo"
             className="h-auto w-44 sm:w-52"
             height={99}
             priority
