@@ -6,7 +6,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 const steps = [
   {
     title: "Enter an address",
-    copy: "Paste a Solana wallet or connect from the dashboard.",
+    copy: "Paste a Solana wallet on the profile page.",
   },
   {
     title: "Analyze activity",
@@ -14,7 +14,7 @@ const steps = [
   },
   {
     title: "View credit score",
-    copy: "Get a clear score, risk level, factor breakdown, and suggested lending terms.",
+    copy: "Get points, risk level, and the badge level unlocked by that wallet profile.",
   },
 ];
 
@@ -25,8 +25,8 @@ const tools = [
     href: "/leaderboard",
   },
   {
-    title: "Score Badge",
-    copy: "Preview a non-transferable devnet credential for score-gated protocol access.",
+    title: "Profile Badge",
+    copy: "Check which Medusa badge a wallet has earned and how many points it has.",
     href: "/badge",
   },
   {
@@ -51,14 +51,14 @@ export default function Home() {
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-7 text-[#450041]/75 sm:text-lg sm:leading-8">
             Solana Trust turns wallet behavior into a readable borrower profile.
-            Use the dashboard to search an address and review its score factors.
+            Use the profile page to search an address, review its points, and see the badge it earns.
           </p>
           <div className="mt-7 flex flex-wrap gap-3 sm:gap-4">
             <Link
               className="rounded-md bg-[#00B65C] px-5 py-3 text-sm font-black text-[#FFFFFF] transition hover:bg-[#450041]"
               href="/dashboard"
             >
-              Open Dashboard
+              Open Profile
             </Link>
             <a
               className="rounded-md border border-[#450041]/30 px-5 py-3 text-sm font-bold text-[#450041] transition hover:border-[#00B65C] hover:text-[#00B65C]"
@@ -123,9 +123,9 @@ export default function Home() {
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-sm font-black uppercase tracking-[0.2em] text-[#00B65C]">
-              Dashboard tools
+              Profile tools
             </p>
-            <h2 className="mt-3 text-3xl font-black">Lookup, simulate, compare.</h2>
+            <h2 className="mt-3 text-3xl font-black">Check badges, then simulate.</h2>
           </div>
           <Link className="text-sm font-black text-[#00B65C]" href="/calculator">
             Open calculator

@@ -9,7 +9,7 @@ skip-lint = false
 solana_trust = "BZvu64yv285maSxcw2CiCL77wgLsEZ3VNCYZddZw2o1T"
 
 [provider]
-cluster = "localnet"
+cluster = "devnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]

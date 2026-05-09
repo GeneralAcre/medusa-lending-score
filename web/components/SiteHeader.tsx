@@ -2,14 +2,15 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useState } from "react";
 
 const navItems = [
   { label: "Home", href: "/" },
-  { label: "Calculator", href: "/dashboard" },
+  { label: "Profile", href: "/dashboard" },
   { label: "Leaderboard", href: "/leaderboard" },
   { label: "Badge", href: "/badge" },
-  { label: "Score", href: "/calculator" },
+  { label: "Simulator", href: "/calculator" },
 ];
 
 export function SiteHeader() {
@@ -39,6 +40,7 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
+          <WalletMultiButton />
         </div>
 
         <button
@@ -69,6 +71,9 @@ export function SiteHeader() {
                 {item.label}
               </Link>
             ))}
+            <div className="wallet-header-mobile">
+              <WalletMultiButton />
+            </div>
           </div>
         </div>
       ) : null}
