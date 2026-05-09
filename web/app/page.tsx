@@ -36,6 +36,8 @@ const tools = [
   },
 ];
 
+const devnetProgramId = "BZvu64yv285maSxcw2CiCL77wgLsEZ3VNCYZddZw2o1T";
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#FFFFFF] text-[#450041]">
@@ -81,11 +83,16 @@ export default function Home() {
                 width={120}
               />
             </div>
-            <div className="inline-flex min-h-14 items-center rounded-full border border-[#450041]/18 bg-[#FFFFFF] px-5 py-2 shadow-[0_12px_38px_rgba(69,0,65,0.10)]">
+            <a
+              className="inline-flex min-h-14 items-center rounded-full border border-[#450041]/18 bg-[#FFFFFF] px-5 py-2 shadow-[0_12px_38px_rgba(69,0,65,0.10)] transition hover:border-[#00B65C] hover:text-[#00B65C]"
+              href={`https://explorer.solana.com/address/${devnetProgramId}?cluster=devnet`}
+              rel="noreferrer"
+              target="_blank"
+            >
               <p className="text-xs font-black uppercase tracking-[0.16em] text-[#450041]/65">
-                Deployed on Devnet
+                Devnet Deploy
               </p>
-            </div>
+            </a>
           </div>
         </div>
 

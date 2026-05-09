@@ -14,8 +14,8 @@ export default function DashboardPage() {
             See wallet identity and credibility.
           </h1>
           <p className="mt-4 text-sm leading-6 text-[#450041]/70 sm:text-base sm:leading-7">
-            Load a Solana wallet to review its credibility score, account activity, risk
-            signals, and earned Medusa badge.
+            Connect your Solana wallet to review its credibility score, account activity,
+            risk signals, and earned Medusa badge.
           </p>
         </div>
         <ProfileClient />

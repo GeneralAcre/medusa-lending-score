@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { FormEvent, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { CreditReport, ScoreFactor } from "@/lib/scoring";
 
 const badgeLevels = [
@@ -47,44 +47,11 @@ export function ProfileClient() {
   });
   const [report, setReport] = useState<CreditReport | null>(null);
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [shareLabel, setShareLabel] = useState("Share");
 
   const badge = report ? badgeForScore(report.score) : badgeLevels[0];
   const score = report?.score ?? 0;
   const activities = report ? activityStats(report) : emptyActivities;
-
-  useEffect(() => {
-    const timeout = window.setTimeout(() => {
-      const nextAddress = publicKey?.toBase58() ?? "";
-      if (!nextAddress) return;
-
-      setWallet(nextAddress);
-      setReport(null);
-      setError("");
-      window.localStorage.setItem("solana-trust-wallet", nextAddress);
-    }, 0);
-
-    return () => window.clearTimeout(timeout);
-  }, [publicKey]);
-
-  async function pasteAddress() {
-    try {
-      const clipboardText = await navigator.clipboard.readText();
-      const nextWallet = clipboardText.trim();
-
-      if (!nextWallet) {
-        setError("Clipboard does not contain a wallet address.");
-        return;
-      }
-
-      setWallet(nextWallet);
-      setReport(null);
-      setError("");
-    } catch {
-      setError("Allow clipboard access or paste the wallet address manually.");
-    }
-  }
 
   async function shareProfile() {
     const value = report?.wallet ?? wallet.trim();
@@ -95,16 +62,14 @@ export function ProfileClient() {
     window.setTimeout(() => setShareLabel("Share"), 1400);
   }
 
-  async function loadProfile(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const trimmedWallet = wallet.trim();
+  const loadProfile = useCallback(async (nextWallet: string) => {
+    const trimmedWallet = nextWallet.trim();
 
     if (!trimmedWallet) {
-      setError("Paste or connect a Solana wallet first.");
+      setError("Connect your Solana wallet first.");
       return;
     }
 
-    setIsLoading(true);
     setError("");
     setReport(null);
 
@@ -120,67 +85,57 @@ export function ProfileClient() {
       setReport(payload as CreditReport);
     } catch (caughtError) {
       setError(caughtError instanceof Error ? caughtError.message : "Unable to load profile.");
-    } finally {
-      setIsLoading(false);
     }
-  }
+  }, []);
+
+  useEffect(() => {
+    const timeout = window.setTimeout(() => {
+      const nextAddress = publicKey?.toBase58() ?? "";
+      if (!nextAddress) {
+        setWallet("");
+        setReport(null);
+        return;
+      }
+
+      setWallet(nextAddress);
+      window.localStorage.setItem("solana-trust-wallet", nextAddress);
+      void loadProfile(nextAddress);
+    }, 0);
+
+    return () => window.clearTimeout(timeout);
+  }, [loadProfile, publicKey]);
 
   return (
     <section className="rounded-xl border border-[#450041]/18 bg-[#450041] text-[#FFFFFF] shadow-[0_28px_90px_rgba(69,0,65,0.22)]">
-      <div className="border-b border-[#FFFFFF]/12 p-5 sm:p-6 lg:p-8">
-        <form className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_96px_150px]" onSubmit={loadProfile}>
-          <input
-            className="min-h-12 rounded-lg border border-[#FFFFFF]/18 bg-[#FFFFFF]/10 px-4 text-sm text-[#FFFFFF] outline-none placeholder:text-[#FFFFFF]/50 focus:border-[#00B65C]"
-            onChange={(event) => setWallet(event.target.value)}
-            placeholder="Paste wallet address or connect wallet"
-            value={wallet}
-          />
-          <button
-            className="rounded-md border border-[#FFFFFF]/18 px-4 py-3 text-sm font-black text-[#FFFFFF] hover:border-[#00B65C] hover:text-[#00B65C]"
-            onClick={pasteAddress}
-            type="button"
-          >
-            Paste
-          </button>
-          <button
-            className="rounded-md bg-[#00B65C] px-5 py-3 text-sm font-black text-[#FFFFFF] hover:bg-[#450041] disabled:bg-[#FFFFFF]/12 disabled:text-[#FFFFFF]/42"
-            disabled={isLoading}
-            type="submit"
-          >
-            {isLoading ? "Loading" : "Load Profile"}
-          </button>
-        </form>
-        {error ? (
-          <p className="mt-4 rounded-lg border border-[#00B65C]/50 bg-[#00B65C]/12 px-4 py-3 text-sm text-[#FFFFFF]">
-            {error}
-          </p>
-        ) : null}
-      </div>
-
       <div className="relative overflow-hidden p-5 sm:p-6 lg:p-8">
         <div className="pointer-events-none absolute inset-0 bg-[#FFFFFF]/[0.03]" />
         <div className="pointer-events-none absolute inset-0 opacity-[0.09] [background-image:linear-gradient(#fff_1px,transparent_1px),linear-gradient(90deg,#fff_1px,transparent_1px)] [background-size:72px_72px]" />
         <div className="relative">
-          <div className="flex flex-wrap items-start justify-between gap-5">
-            <div className="flex min-w-0 items-center gap-5">
-              <div className="grid h-20 w-20 shrink-0 place-items-center rounded-xl border border-[#FFFFFF]/30 bg-[#FFFFFF]/10 text-4xl font-black shadow-[0_18px_42px_rgba(0,0,0,0.18)]">
+          {error ? (
+            <p className="mb-5 rounded-lg border border-[#00B65C]/50 bg-[#00B65C]/12 px-4 py-3 text-sm text-[#FFFFFF]">
+              {error}
+            </p>
+          ) : null}
+          <div className="flex flex-col items-stretch gap-5 sm:flex-row sm:items-start sm:justify-between">
+            <div className="flex min-w-0 items-center gap-4 sm:gap-5">
+              <div className="grid h-16 w-16 shrink-0 place-items-center rounded-xl border border-[#FFFFFF]/30 bg-[#FFFFFF]/10 text-3xl font-black shadow-[0_18px_42px_rgba(0,0,0,0.18)] sm:h-20 sm:w-20 sm:text-4xl">
                 {report ? report.wallet.slice(0, 1).toUpperCase() : "?"}
               </div>
               <div className="min-w-0">
                 <p className="text-xs font-black uppercase tracking-[0.18em] text-[#00B65C]">
                   Wallet Identity
                 </p>
-                <h1 className="mt-2 truncate text-2xl font-black sm:text-3xl">
+                <h1 className="mt-2 truncate text-xl font-black sm:text-3xl">
                   {report ? shortAddress(report.wallet) : "Unverified profile"}
                 </h1>
                 <p className="mt-2 inline-flex rounded-full border border-[#FFFFFF]/22 px-3 py-1 text-xs font-black text-[#FFFFFF]/82">
-                  {report?.band ?? "Connect or paste wallet"}
+                  {report?.band ?? (wallet ? "Loading connected wallet" : "Connect wallet")}
                 </p>
               </div>
             </div>
 
             <button
-              className="rounded-lg border border-[#FFFFFF]/24 bg-[#FFFFFF]/10 px-5 py-3 text-sm font-black text-[#FFFFFF] hover:border-[#00B65C] hover:bg-[#00B65C]"
+              className="rounded-lg border border-[#FFFFFF]/24 bg-[#FFFFFF]/10 px-5 py-3 text-sm font-black text-[#FFFFFF] hover:border-[#00B65C] hover:bg-[#00B65C] sm:w-auto"
               onClick={shareProfile}
               type="button"
             >
@@ -190,19 +145,19 @@ export function ProfileClient() {
 
           <div className="mt-8 grid gap-4 lg:grid-cols-[minmax(280px,0.9fr)_minmax(0,1.25fr)]">
             <section className="rounded-lg border border-[#FFFFFF]/16 bg-[#FFFFFF]/10 p-5">
-              <div className="flex items-start justify-between gap-4">
+              <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
                   <p className="text-xs font-black uppercase tracking-[0.16em] text-[#FFFFFF]/50">
                     Credibility Score
                   </p>
                   <div className="mt-4 flex items-end gap-3">
-                    <p className="text-7xl font-black leading-none text-[#FFFFFF]">
+                    <p className="text-5xl font-black leading-none text-[#FFFFFF] sm:text-7xl">
                       {report?.score ?? "--"}
                     </p>
                     <p className="pb-2 text-sm font-black text-[#00B65C]">/ 98 pts</p>
                   </div>
                 </div>
-                <div className="h-24 w-24 overflow-hidden rounded-lg border border-[#FFFFFF]/18 bg-[#FFFFFF]/10">
+                <div className="h-20 w-20 overflow-hidden rounded-lg border border-[#FFFFFF]/18 bg-[#FFFFFF]/10 sm:h-24 sm:w-24">
                   <Image
                     alt={`${badge.name} artwork`}
                     className="h-full w-full object-cover"
@@ -220,7 +175,7 @@ export function ProfileClient() {
               </div>
               <p className="mt-4 text-sm leading-6 text-[#FFFFFF]/62">
                 {report?.summary ??
-                  "Load a wallet profile to see credibility based on transaction success, account age, liquidity, and protocol activity."}
+                  "Connect a wallet to see credibility based on transaction success, account age, liquidity, and protocol activity."}
               </p>
             </section>
 
@@ -254,7 +209,7 @@ export function ProfileClient() {
                 ))}
                 {!report ? (
                   <p className="rounded-lg border border-[#FFFFFF]/14 bg-[#FFFFFF]/8 p-4 text-sm text-[#FFFFFF]/64">
-                    Activity signals appear after loading a wallet.
+                    Activity signals appear after connecting a wallet.
                   </p>
                 ) : null}
               </div>
@@ -270,6 +225,7 @@ export function ProfileClient() {
               </div>
             </section>
           </div>
+
         </div>
       </div>
     </section>

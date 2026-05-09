@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { BadgeMintClient } from "@/components/BadgeMintClient";
 import { SiteHeader } from "@/components/SiteHeader";
 
 const badgeLevels = [
