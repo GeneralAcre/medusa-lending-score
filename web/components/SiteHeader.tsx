@@ -7,10 +7,11 @@ import { useState } from "react";
 
 const navItems = [
   { label: "Home", href: "/" },
-  { label: "Profile", href: "/dashboard" },
+  { label: "Simulator", href: "/calculator" },
   { label: "Leaderboard", href: "/leaderboard" },
   { label: "Badge", href: "/badge" },
-  { label: "Simulator", href: "/calculator" },
+  { label: "Profile", href: "/dashboard" },
+  
 ];
 
 export function SiteHeader() {

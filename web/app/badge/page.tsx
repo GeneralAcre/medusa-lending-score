@@ -65,9 +65,6 @@ export default function BadgePage() {
           </div>
         </div>
 
-        <div className="mt-8">
-          <BadgeMintClient />
-        </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-5 pb-14 sm:px-6 lg:px-8">
@@ -84,10 +81,11 @@ export default function BadgePage() {
           </p>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {/* ALIGNED CARDS GRID */}
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4 items-stretch">
           {badgeLevels.map((badge) => (
             <article
-              className="rounded-lg border border-[#450041]/16 bg-[#FFFFFF] p-4 shadow-[0_14px_44px_rgba(69,0,65,0.08)]"
+              className="flex flex-col h-full rounded-lg border border-[#450041]/16 bg-[#FFFFFF] p-4 shadow-[0_14px_44px_rgba(69,0,65,0.08)]"
               key={badge.name}
             >
               <div className="grid aspect-square place-items-center overflow-hidden rounded-lg border border-[#450041]/12 bg-[#450041]/5">
@@ -99,6 +97,7 @@ export default function BadgePage() {
                   width={512}
                 />
               </div>
+
               <div className="mt-4 flex items-start justify-between gap-3">
                 <div>
                   <h3 className="text-lg font-black">{badge.name}</h3>
@@ -110,12 +109,21 @@ export default function BadgePage() {
                   {badge.points}
                 </p>
               </div>
-              <p className="mt-4 text-sm leading-6 text-[#450041]/70">{badge.description}</p>
-              <div className="mt-4 rounded-lg border border-[#450041]/12 bg-[#450041]/5 p-3">
-                <p className="text-xs font-black uppercase tracking-[0.12em] text-[#450041]/55">
-                  How to get it
-                </p>
-                <p className="mt-2 text-sm leading-6 text-[#450041]/75">{badge.howToEarn}</p>
+
+              <p className="mt-4 text-sm leading-6 text-[#450041]/70">
+                {badge.description}
+              </p>
+
+              {/* Pushes "How to get it" to the bottom regardless of description length */}
+              <div className="mt-auto pt-4">
+                <div className="rounded-lg border border-[#450041]/12 bg-[#450041]/5 p-3">
+                  <p className="text-xs font-black uppercase tracking-[0.12em] text-[#450041]/55">
+                    How to get it
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-[#450041]/75">
+                    {badge.howToEarn}
+                  </p>
+                </div>
               </div>
             </article>
           ))}

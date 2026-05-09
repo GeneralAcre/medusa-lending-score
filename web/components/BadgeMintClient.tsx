@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { FormEvent, useEffect, useState } from "react";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { FormEvent, useState } from "react";
 import type { CreditReport } from "@/lib/scoring";
 
 const badgeLevels = [
@@ -41,11 +40,7 @@ const badgeLevels = [
 ] as const;
 
 export function BadgeMintClient() {
-  const { publicKey } = useWallet();
-  const [wallet, setWallet] = useState(() => {
-    if (typeof window === "undefined") return "";
-    return window.localStorage.getItem("solana-trust-wallet") ?? "";
-  });
+  const [wallet, setWallet] = useState("");
   const [report, setReport] = useState<CreditReport | null>(null);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -53,22 +48,6 @@ export function BadgeMintClient() {
   const earnedBadge = report ? badgeForScore(report.score) : badgeLevels[0];
   const nextBadge = report ? badgeLevels.find((badge) => badge.minimumScore > report.score) : null;
   const pointsToNext = report && nextBadge ? nextBadge.minimumScore - report.score : 0;
-
-  useEffect(() => {
-    const timeout = window.setTimeout(() => {
-      const nextAddress = publicKey?.toBase58() ?? "";
-      setWallet(nextAddress);
-      setReport(null);
-      setError("");
-      if (nextAddress) {
-        window.localStorage.setItem("solana-trust-wallet", nextAddress);
-      } else {
-        window.localStorage.removeItem("solana-trust-wallet");
-      }
-    }, 0);
-
-    return () => window.clearTimeout(timeout);
-  }, [publicKey]);
 
   async function pasteAddress() {
     try {
@@ -120,41 +99,8 @@ export function BadgeMintClient() {
 
   return (
     <section className="rounded-xl border border-[#450041]/18 bg-[#450041]/5 p-5 shadow-[0_24px_90px_rgba(69,0,65,0.12)] sm:p-6">
-      <div className="mb-5">
-        <p className="text-sm font-black uppercase tracking-[0.16em] text-[#00B65C]">
-          Wallet Profile
-        </p>
-        <h2 className="mt-2 text-2xl font-black">Check points and earned badge</h2>
-      </div>
+    
 
-      <form className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_90px_140px]" onSubmit={loadScore}>
-        <input
-          className="min-h-12 rounded-lg border border-[#450041]/20 bg-[#FFFFFF] px-4 text-sm outline-none focus:border-[#00B65C]"
-          onChange={(event) => setWallet(event.target.value)}
-          placeholder="Devnet wallet address"
-          value={wallet}
-        />
-        <button
-          className="rounded-md border border-[#450041]/25 px-4 py-3 text-sm font-bold text-[#450041] transition hover:border-[#00B65C] hover:text-[#00B65C]"
-          onClick={pasteAddress}
-          type="button"
-        >
-          Paste
-        </button>
-        <button
-          className="rounded-md bg-[#00B65C] px-5 py-3 text-sm font-black text-[#FFFFFF] transition hover:bg-[#450041] disabled:bg-[#450041]/15 disabled:text-[#450041]/45"
-          disabled={isLoading}
-          type="submit"
-        >
-          {isLoading ? "Checking" : "Check"}
-        </button>
-      </form>
-
-      {error ? (
-        <p className="mt-4 rounded-lg border border-[#00B65C] bg-[#00B65C]/10 px-4 py-3 text-sm text-[#450041]">
-          {error}
-        </p>
-      ) : null}
 
       <div className="mt-6 grid gap-5 rounded-xl border border-[#450041]/18 bg-[#FFFFFF] p-5 lg:grid-cols-[220px_minmax(0,1fr)]">
         <div className="grid place-items-center">
