@@ -8,6 +8,12 @@ Live app:
 https://medusa-score.vercel.app/
 ```
 
+Live demo:
+
+```txt
+https://www.youtube.com/watch?v=RKBy5gVq_bQ
+```
+
 ## What It Does
 
 - Connects a Solana wallet on Devnet.

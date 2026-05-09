@@ -68,6 +68,12 @@ export default function Home() {
             >
               How It Works
             </a>
+            <Link
+              className="rounded-md border border-[#450041]/30 px-5 py-3 text-sm font-bold text-[#450041] transition hover:border-[#00B65C] hover:text-[#00B65C]"
+              href="/whitepaper"
+            >
+              Whitepaper
+            </Link>
           </div>
           <div className="mt-12 flex flex-wrap gap-3">
             <a
