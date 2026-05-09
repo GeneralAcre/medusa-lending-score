@@ -10,7 +10,6 @@ const navItems = [
   { label: "Simulator", href: "/calculator" },
   { label: "Leaderboard", href: "/leaderboard" },
   { label: "Badge", href: "/badge" },
-  { label: "Whitepaper", href: "/whitepaper" },
   { label: "Profile", href: "/dashboard" },
 ];
 
